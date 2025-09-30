@@ -1,0 +1,71 @@
+{
+  file :
+  {
+    "runtime" : "PIPELINED",
+    runtime-impl : "PIPELINED",
+    version : "5",
+    DbHits : 190,
+    batch-size : 128,
+    Details : "c",
+    planner-version : "2025.08",
+    PipelineInfo : "Fused in Pipeline 1",
+    runtime-version : "2025.08",
+    Id : 0,
+    EstimatedRows : 1.555,
+    planner : "COST",
+    Rows : 38
+  },
+  identifiers : [a, c],
+  children : [
+    SimplePlanTreeNode{
+      operatorType : 'Apply@neo4j',
+      arguments : {
+        Id : 1,
+        EstimatedRows : 1.555,
+        DbHits : 0, Rows : 38
+      },
+      identifiers : [a, c],
+      children : [
+        SimplePlanTreeNode{
+          operatorType : 'NodeIndexSeek@neo4j',
+          arguments : {
+            Details : "RANGE INDEX a:TypeC(name) WHERE name  :  $autostring_0",
+            PipelineInfo : "In Pipeline 0",
+            Memory : 376,
+            Time : 99250,
+            Id : 3,
+            EstimatedRows : 1.0,
+            PageCacheMisses : 0,
+            DbHits : 2,
+            Rows : 1,
+            PageCacheHits : 1
+          },
+          identifiers : [a],
+          children : []
+        },
+        SimplePlanTreeNode{
+          operatorType : 'NodeIndexSeekByRange@neo4j',
+          arguments : {
+            Details : "RANGE INDEX c:TypeC(new_id_label) WHERE new_id_label > :  cache[a.new_id_label] AND new_id_label < cache[a.new_id_label] + a.interval_width, cache[c.new_id_label]",
+            PipelineInfo : "Fused in Pipeline 1",
+            Memory : 2288,
+            Time : 375250,
+            Id : 2,
+            EstimatedRows : 1.555,
+            PageCacheMisses : 0,
+            DbHits : 43,
+            Rows : 38,
+            PageCacheHits : 8
+          },
+          identifiers : [a, c],
+          children : []
+        }
+      ]
+    }
+  ]
+},
+notifications : [],
+resultAvailableAfter : 28,
+resultConsumedAfter : 1
+}
+}
